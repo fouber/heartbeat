@@ -23,12 +23,13 @@ app.get('/', function(req, res){
     for(var key in map){
         if(map.hasOwnProperty(key)){
             var time = map[key];
+            var d = new Date(time) + '';
             if(now - time > EXPIRES_TIME){
                 ret.zombie.count++;
-                ret.zombie.items[key] = new Date(time);
+                ret.zombie.items[key] = d;
             } else {
                 ret.alive.count++;
-                ret.alive.items[key] = new Date(time);
+                ret.alive.items[key] = d;
             }
         }
     }
