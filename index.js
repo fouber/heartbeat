@@ -21,8 +21,17 @@ var soFar = function(d){
     return [pad(hour), pad(minute), pad(second)].join(':');
 };
 app.get('/clean', function(req, res){
-    map = {};
-    console.log('clean all process');
+    var now = Date.now();
+    for(var key in map){
+        if(map.hasOwnProperty(key)){
+            var time = map[key];
+            var d = new Date(time);
+            if(now - time > EXPIRES_TIME){
+                delete map[key];
+            }
+        }
+    }
+    console.log('clean all zombie process');
     res.json({ code: 0 });
     save();
 });
