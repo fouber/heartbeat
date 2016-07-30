@@ -42,12 +42,14 @@ app.get('/', function(req, res){
 app.get('/start', function(req, res){
     var id = req.query.id;
     map[id] = Date.now();
+    console.log('start process %s', id);
     res.json({ code: 0 });
     save();
 });
 app.get('/end', function(req, res){
     var id = req.query.id;
     delete map[id];
+    console.log('end process %s', id);
     res.json({ code: 0 });
     save();
 });
