@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>hello world</title>
+    <meta charset="UTF-8">
+    <title>监控</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 </head>
 <body>
-    <h2>hello world</h2>
+    <% for(var key in ret) { %>
+    <h1><%= key %> (<%= ret[key].count %>)</h1>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var id in ret[key].items) { %>
+            <tr>
+                <td><%= id %></td>
+                <td><%= ret[key].items[id] %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <% } %>
 </body>
 </html>

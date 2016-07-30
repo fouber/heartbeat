@@ -38,7 +38,7 @@ app.get('/', function(req, res){
             delete ret[key];
         }
     }
-    res.json(ret);
+    res.render('index', {ret: ret});
 });
 app.get('/start', function(req, res){
     var id = req.query.id;
