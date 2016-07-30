@@ -20,6 +20,12 @@ var soFar = function(d){
     var hour = (diff - minute)/60;
     return [pad(hour), pad(minute), pad(second)].join(':');
 };
+app.get('/clean', function(req, res){
+    map = {};
+    console.log('clean all process');
+    res.json({ code: 0 });
+    save();
+});
 app.get('/', function(req, res){
     var now = Date.now();
     var ret = {
