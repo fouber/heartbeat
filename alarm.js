@@ -2,7 +2,7 @@ var request = require('./request');
 
 module.exports = function(data, callback){
     callback = callback || function(){};
-    request.post(url,
+    request.post("http://egaogong.com/weixinaa/tplinfo",
         {
             form: {
                 alive: data.alive.count,
