@@ -32,5 +32,5 @@ var MAX_ZOMBIE_COUNT = 0;
             console.log('done');
         });
     }
-    setTimeout(run, 30 * 1000);
+    setTimeout(run, 60 * 1000);
 })();
