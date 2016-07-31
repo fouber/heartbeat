@@ -10,6 +10,7 @@ module.exports = function(data, callback){
             }
         }, 
         function(err,httpResponse,body){
+            if(err) console.log('[E] ' + err);
             callback.apply(null, arguments);
         }
     ); 
