@@ -19,6 +19,7 @@ var parse = require('./parse');
     }
     if(err.length){
         err.unshift('神秘服务发生异常');
+        err.push('服务地址：http://52.41.18.233:5000/');
         err = err.join('，');
         console.log(err);
         sms(err, function(){
