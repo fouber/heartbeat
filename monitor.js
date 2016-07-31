@@ -29,7 +29,7 @@ var count = 0;
     }
     if(err.length){
         err.unshift('神秘服务异常');
-        err.push('服务地址：http://52.41.18.233:5000/');
+        err.push('服务地址：http://120.27.116.219:5000/');
         err = err.join('，');
         console.log(err);
         sms(err, function(){
