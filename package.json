@@ -18,6 +18,7 @@
   "homepage": "https://github.com/fouber/heartbeat#readme",
   "dependencies": {
     "ejs": "^2.5.1",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "request": "^2.74.0"
   }
 }
