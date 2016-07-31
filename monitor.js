@@ -5,6 +5,7 @@ var alarm = require('./alarm');
 var parse = require('./parse');
 var MIN_ALIVE_COUNT = 140;
 var MAX_ZOMBIE_COUNT = 0;
+var count = 0;
 
 (function run(){
     var map = {};
@@ -13,9 +14,12 @@ var MAX_ZOMBIE_COUNT = 0;
         map = JSON.parse(json);
     } catch(e){}
     var ret = parse(map);
-    alarm(ret, function(){
-        console.log('wx_done');
-    });
+    if(count % 60 == 0){
+        alarm(ret, function(){
+            console.log('wx_done');
+        });
+    }
+    count++;
     var err = [];
     if(ret.alive && ret.alive.count < MIN_ALIVE_COUNT){
         err.push('有效进程数：' + ret.alive.count);
