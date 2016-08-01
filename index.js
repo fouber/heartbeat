@@ -3,7 +3,7 @@ var app = express();
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
-var EXPIRES_TIME = 20 * 60 * 1000;
+var EXPIRES_TIME = 25 * 60 * 1000;
 var map = {};
 try {
     map = require('/tmp/map.json');
