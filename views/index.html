@@ -15,7 +15,7 @@
 <body>
     <% for(var key in ret) { %>
     <h1><%= key %> (<%= ret[key].count %>)</h1>
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th width="130px">MAC地址</th>
@@ -23,7 +23,7 @@
                 <th width="70px">执行时间</th>
             </tr>
         </thead>
-        <tbody class="table-striped table-hover">
+        <tbody class="table-striped">
             <% for(var id in ret[key].items) { %>
             <tr>
                 <td><%= id %></td>
