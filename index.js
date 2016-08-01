@@ -13,6 +13,7 @@ app.get('/', function(req, res){
     var ret = parse(map);
     res.render('index', {ret: ret});
 });
+app.use(express.static(__dirname));
 app.get('/clean', function(req, res){
     var now = Date.now();
     for(var key in map){

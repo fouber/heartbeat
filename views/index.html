@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <title>监控</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            font-size: 14px;
+            font-family: sans-serif;
+        }
+    </style>
 </head>
 <body>
     <% for(var key in ret) { %>
     <h1><%= key %> (<%= ret[key].count %>)</h1>
-    <table border="1" cellpadding="10">
+    <table class="table">
         <thead>
             <tr>
-                <th>MAC地址</th>
-                <th>开始时间</th>
-                <th>执行时间</th>
+                <th width="130px">MAC地址</th>
+                <th width="320px">开始时间</th>
+                <th width="70px">执行时间</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-striped table-hover">
             <% for(var id in ret[key].items) { %>
             <tr>
                 <td><%= id %></td>
