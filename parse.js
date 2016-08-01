@@ -1,4 +1,4 @@
-var EXPIRES_TIME = 20 * 60 * 1000;
+var EXPIRES_TIME = 25 * 60 * 1000;
 
 var pad = function(str){
     return ('0' + str).slice(-2);

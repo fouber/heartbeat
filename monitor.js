@@ -3,7 +3,7 @@ var file = '/tmp/map.json';
 var sms = require('./sms');
 var alarm = require('./alarm');
 var parse = require('./parse');
-var MIN_ALIVE_COUNT = 140;
+var MIN_ALIVE_COUNT = 160;
 var MAX_ZOMBIE_COUNT = 0;
 var count = 0;
 
