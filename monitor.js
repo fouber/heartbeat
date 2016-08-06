@@ -3,7 +3,7 @@ var file = '/tmp/map.json';
 var sms = require('./sms');
 var alarm = require('./alarm');
 var parse = require('./parse');
-var MIN_ALIVE_COUNT = 160;
+var MIN_ALIVE_COUNT = 150;
 var MAX_ZOMBIE_COUNT = 0;
 var count = 0;
 
@@ -23,8 +23,8 @@ var count = 0;
     var err = [];
     if(ret.alive && ret.alive.count < MIN_ALIVE_COUNT){
         err.push('有效进程数：' + ret.alive.count);
-    }
-    if(ret.zombie && ret.zombie.count > MAX_ZOMBIE_COUNT) {
+    // }
+    // if(ret.zombie && ret.zombie.count > MAX_ZOMBIE_COUNT) {
         err.push('僵尸进程数：' + ret.zombie.count);
     }
     if(err.length){
