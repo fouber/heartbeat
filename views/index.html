@@ -21,6 +21,7 @@
                 <th width="130px">MAC地址</th>
                 <th width="320px">开始时间</th>
                 <th width="70px">执行时间</th>
+                <th width="70px">操作</th>
             </tr>
         </thead>
         <tbody class="table-striped">
@@ -29,15 +30,24 @@
                 <td><%= id %></td>
                 <td><%= ret[key].items[id].startAt %></td>
                 <td><%= ret[key].items[id].sofar %></td>
+                <td><a href="javascript:void(clean('<%= id %>'))">清除</a></td>
             </tr>
             <% } %>
         </tbody>
     </table>
     <% } %>
+    <script type="text/javascript" src="/static/jquery.js"></script>
     <script type="text/javascript">
         setTimeout(function(){
             location.reload(true);
         }, 2 * 60 * 1000);
+        function clean(id){
+            $.getJSON('/end?id=' + id, function(data){
+                if(data && data.code == 0 && data.has){
+                    location.reload(true);
+                }
+            });
+        }
     </script>
 </body>
 </html>
