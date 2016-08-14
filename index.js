@@ -4,7 +4,6 @@ var _ = require('./util');
 var app = express();
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
-
 var EXPIRES_TIME = 25 * 60 * 1000;
 var map = {};
 try {
@@ -61,8 +60,9 @@ app.get('/end', function(req, res){
         console.log('end process %s', id);
     }
     res.json({ code: 0, has: has });
+
     save();
-});
+});]
 function save(){
     fs.writeFileSync('/tmp/map.json', JSON.stringify(map, null, 2));
 }
