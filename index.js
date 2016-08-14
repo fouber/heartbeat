@@ -1,4 +1,5 @@
 var express = require('express');
+var uvlog = require('./uvlog');
 var app = express();
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
@@ -50,7 +51,15 @@ app.get('/end', function(req, res){
         console.log('end process %s', id);
     }
     res.json({ code: 0, has: has });
+    //自有统计
+    uvlog();
     save();
+});
+
+//自有统计数据输出
+app.get('/uvlog', function(req, res){
+    var data = fs.readFileSync('/tmp/uvlog.json');
+    res.end(data);
 });
 
 var fs = require('fs');
