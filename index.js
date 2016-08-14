@@ -62,7 +62,7 @@ app.get('/end', function(req, res){
     res.json({ code: 0, has: has });
 
     save();
-});]
+});
 function save(){
     fs.writeFileSync('/tmp/map.json', JSON.stringify(map, null, 2));
 }
