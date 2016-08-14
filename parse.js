@@ -42,10 +42,5 @@ module.exports = function(map){
             }
         }
     }
-    // for(var key in ret){
-    //     if(ret.hasOwnProperty(key) && ret[key].count == 0){
-    //         delete ret[key];
-    //     }
-    // }
     return ret;
-}
+};

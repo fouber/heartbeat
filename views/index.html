@@ -31,7 +31,7 @@
         </tbody>
     </table>
     <h1>历史流量</h1>
-    <div id="main" style="height:400px;"></div>
+    <div id="main" style="width: 100%; height:300px;"></div>
     <h1>状态监控</h1>
     <% for(var key in ret) { %>
     <h2><%= key %> (<%= ret[key].count %>)</h2>
@@ -58,32 +58,81 @@
     <% } %>
     <script type="text/javascript" src="/static/jquery.js"></script>
     <script type="text/javascript" src="/static/echarts.simple.min.js"></script>
+    <script>
+        var total = <%- JSON.stringify(total) %>;
+    </script>
     <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: 'ECharts 入门示例'
-            },
-            tooltip: {},
-            legend: {
-                data:['销量']
-            },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        };
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        (function(){
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '流量统计图'
+                },
+                toolbox: {
+                    // y: 'bottom',
+                    feature: {
+                        magicType: {
+                            type: ['stack', 'tiled']
+                        },
+                        dataView: {}
+                    }
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:[ 'PC','移动' ]
+                },
+                dataZoom: [
+                    {
+                        show: true,
+                        realtime: true,
+                        start: 50,
+                        end: 100
+                    },
+                    {
+                        type: 'inside',
+                        realtime: true,
+                        start: 50,
+                        end: 100
+                    }
+                ],
+                grid: {
+                    left: '10px',
+                    right: '10px',
+                    containLabel: true
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : total.date
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'PC',
+                        type:'bar',
+                        stack: 'total',
+                        data: total.data.www
+                    },
+                    {
+                        name:'移动',
+                        type:'bar',
+                        stack: 'total',
+                        data: total.data.m
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })();
     </script>
     <script type="text/javascript">
         setTimeout(function(){

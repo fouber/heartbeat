@@ -1,6 +1,7 @@
 var fs = require('fs');
 var express = require('express');
 var _ = require('./util');
+var count = require('./count');
 var app = express();
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
@@ -14,15 +15,16 @@ app.get('/', function(req, res){
     res.render('index', {
         ret: parse(map),
         count: {
-            www: _.count('www'),
-            m: _.count('m')
-        }
+            www: count.current('www'),
+            m: count.current('m')
+        },
+        total: count.total(true)
     });
 });
 app.use(express.static(__dirname));
 app.get('/incrs', function(req, res){
     res.json({code: 0});
-    _.incrs(req.query.type);
+    count.incrs(req.query.type);
 });
 app.get('/clean', function(req, res){
     var now = Date.now();
