@@ -51,8 +51,7 @@ app.get('/end', function(req, res){
         console.log('end process %s', id);
     }
     res.json({ code: 0, has: has });
-    //自有统计
-    uvlog();
+
     save();
 });
 
@@ -60,6 +59,12 @@ app.get('/end', function(req, res){
 app.get('/uvlog', function(req, res){
     var data = fs.readFileSync('/tmp/uvlog.json');
     res.end(data);
+});
+app.get('/finish', function(req, res){
+    //自有统计
+    uvlog();
+    var data = fs.readFileSync('/tmp/uvlog.json');
+    res.json({ code: 0 });
 });
 
 var fs = require('fs');
