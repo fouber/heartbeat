@@ -13,8 +13,28 @@
     </style>
 </head>
 <body>
+    <h1>今日流量</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th width="130px">站点</th>
+                <th>统计</th>
+            </tr>
+        </thead>
+        <tbody class="table-striped">
+            <% for(var type in count) { %>
+            <tr>
+                <td><%= type %>.quanmin.tv</td>
+                <td><%= count[type] %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <h1>历史流量</h1>
+    <div id="main" style="height:400px;"></div>
+    <h1>状态监控</h1>
     <% for(var key in ret) { %>
-    <h1><%= key %> (<%= ret[key].count %>)</h1>
+    <h2><%= key %> (<%= ret[key].count %>)</h2>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -37,6 +57,34 @@
     </table>
     <% } %>
     <script type="text/javascript" src="/static/jquery.js"></script>
+    <script type="text/javascript" src="/static/echarts.simple.min.js"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
     <script type="text/javascript">
         setTimeout(function(){
             location.reload(true);

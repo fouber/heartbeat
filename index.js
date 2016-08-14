@@ -1,4 +1,6 @@
+var fs = require('fs');
 var express = require('express');
+var _ = require('./util');
 var app = express();
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
@@ -10,10 +12,19 @@ try {
 } catch(e){}
 var parse = require('./parse');
 app.get('/', function(req, res){
-    var ret = parse(map);
-    res.render('index', {ret: ret});
+    res.render('index', {
+        ret: parse(map),
+        count: {
+            www: _.count('www'),
+            m: _.count('m')
+        }
+    });
 });
 app.use(express.static(__dirname));
+app.get('/incrs', function(req, res){
+    res.json({code: 0});
+    _.incrs(req.query.type);
+});
 app.get('/clean', function(req, res){
     var now = Date.now();
     for(var key in map){
@@ -25,10 +36,10 @@ app.get('/clean', function(req, res){
             }
         }
     }
-    console.log('clean all zombie process');
     res.json({ code: 0 });
     save();
 });
+
 app.get('/start', function(req, res){
     var id = req.query.id;
     var repeat = false;
@@ -52,8 +63,6 @@ app.get('/end', function(req, res){
     res.json({ code: 0, has: has });
     save();
 });
-
-var fs = require('fs');
 function save(){
     fs.writeFileSync('/tmp/map.json', JSON.stringify(map, null, 2));
 }
