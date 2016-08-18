@@ -80,7 +80,26 @@
                     }
                 },
                 tooltip : {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    formatter: function(param){
+                        var html = [];
+                        if(!param.length) return '';
+                        var name = param[0].name;
+                        var date = new Date(name);
+                        var day = date.getDay();
+                        var week = [ '日', '一', '二', '三', '四', '五', '六', '日' ];
+                        html.push(name + '，星期' + week[day]);
+                        var total = 0;
+                        for(var i = 0; i < param.length; i++){
+                            if(param[i].seriesName == 'PC') name = '主站'; 
+                            else name = '移动';
+                            var value = param[i].value;
+                            html.push(name + ': ' + value);
+                            total += value;
+                        }
+                        html.push('总量: ' + total);
+                        return html.join('<br/>');
+                    }
                 },
                 legend: {
                     data:[ 'PC','移动' ]
