@@ -71,3 +71,14 @@ exports.save = function(date){
     fs.unlinkSync(www_file);
     fs.unlinkSync(m_file);
 };
+
+exports.saveYestoday = function(){
+    var d = new Date();
+    d.setDate(d.getDate() - 1);
+    var date = [
+        d.getFullYear(),
+        _.pad(d.getMonth() + 1),
+        _.pad(d.getDate())
+    ].join('-');
+    console.log(date);
+};
