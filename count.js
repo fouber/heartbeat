@@ -80,5 +80,6 @@ exports.saveYestoday = function(){
         _.pad(d.getMonth() + 1),
         _.pad(d.getDate())
     ].join('-');
-    console.log(date);
+    exports.save(date);
+    console.log('store data at %s', date);
 };
