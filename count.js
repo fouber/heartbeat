@@ -7,7 +7,7 @@ var speed = {
     'www': {
         count: read('www'),
         time: Date.now()
-    }
+    },
     'm': {
         count: read('m'),
         time: Date.now()
