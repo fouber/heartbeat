@@ -45,8 +45,8 @@ exports.speed = function(type){
         var s = speed[type];
         var start = s.count;
         var current = exports.current(type);
-        var dTime = Math.round(((Date.now() - s.time) / 1000));
-        return (current - start) / dTime * 60;
+        var dTime = ((Date.now() - s.time) / 1000);
+        return Math.round((current - start) / dTime * 60);
     } else {
         return 0;
     }
