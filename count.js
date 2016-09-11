@@ -2,6 +2,17 @@ var fs = require('fs');
 var _ = require('./util');
 var DATA_ROOT = __dirname + '/data/';
 var DATA_TOTAL = DATA_ROOT + 'total.json';
+var TIME_TO_CLEAN = 1000 * 60 * 5;
+var speed = {
+    'www': {
+        count: read('www'),
+        time: Date.now()
+    }
+    'm': {
+        count: read('m'),
+        time: Date.now()
+    }
+};
 
 function read(type, d){
     var f = getIncrsPath(type, d);
@@ -18,6 +29,27 @@ function getIncrsPath(type, d){
 
 exports.incrs = function(type){
     fs.writeFile(getIncrsPath(type), '1', { flag: 'a' });
+    if(speed.hasOwnProperty(type)){
+        var s = speed[type];
+        var now = Date.now();
+        var dTime = now - s.time;
+        if(dTime > TIME_TO_CLEAN){
+            s.count = read(type);
+            s.time = now;
+        }
+    }
+};
+
+exports.speed = function(type){
+    if(speed.hasOwnProperty(type)){
+        var s = speed[type];
+        var start = s.count;
+        var current = exports.current(type);
+        var dTime = (Date.now() - s.time) / 1000;
+        var speed = (current - start) / dTime * 60;
+    } else {
+        return 0;
+    }
 };
 
 exports.current = function(type){

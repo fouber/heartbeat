@@ -18,6 +18,10 @@ app.get('/', function(req, res){
             www: count.current('www'),
             m: count.current('m')
         },
+        speed: {
+            www: count.speed('www'),
+            m: count.speed('m')
+        },
         total: count.total(true)
     });
 });
