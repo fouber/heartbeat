@@ -46,7 +46,7 @@ exports.speed = function(type){
         var start = s.count;
         var current = exports.current(type);
         var dTime = (Date.now() - s.time) / 1000;
-        var speed = (current - start) / dTime * 60;
+        var spd = (current - start) / dTime * 60;
     } else {
         return 0;
     }
