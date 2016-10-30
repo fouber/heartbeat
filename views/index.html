@@ -13,39 +13,22 @@
     </style>
 </head>
 <body>
-    <h1>今日流量</h1>
+    <h1>Test</h1>
     <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>站点</th>
-                <th width="130px">统计</th>
-                <th width="130px">速度</th>
-            </tr>
-        </thead>
         <tbody class="table-striped">
             <% for(var type in count) { %>
             <tr>
-                <td><%= type %>.quanmin.tv</td>
+                <td><%= type.substring(0, 1) %></td>
                 <td><%= count[type] %></td>
-                <td><%= speed[type] %>/分钟</td>
+                <td><%= speed[type] %>/m</td>
             </tr>
             <% } %>
         </tbody>
     </table>
-    <h1>历史流量</h1>
     <div id="main" style="width: 100%; height:300px;"></div>
-    <h1>状态监控</h1>
     <% for(var key in ret) { %>
     <h2><%= key %> (<%= ret[key].count %>)</h2>
     <table class="table table-hover">
-        <thead>
-            <tr>
-                <th width="130px">MAC地址</th>
-                <th width="320px">开始时间</th>
-                <th width="70px">执行时间</th>
-                <th width="70px">操作</th>
-            </tr>
-        </thead>
         <tbody class="table-striped">
             <% for(var id in ret[key].items) { %>
             <tr>
@@ -69,9 +52,6 @@
             var myChart = echarts.init(document.getElementById('main'));
             // 指定图表的配置项和数据
             var option = {
-                title: {
-                    text: '流量统计图'
-                },
                 toolbox: {
                     // y: 'bottom',
                     feature: {
@@ -93,18 +73,18 @@
                         html.push(name + '，星期' + week[day]);
                         var total = 0;
                         for(var i = 0; i < param.length; i++){
-                            if(param[i].seriesName == 'PC') name = '主站'; 
-                            else name = '移动';
+                            if(param[i].seriesName == 'w') name = 'w'; 
+                            else name = 'm';
                             var value = param[i].value;
                             html.push(name + ': ' + value);
                             total += value;
                         }
-                        html.push('总量: ' + total);
+                        html.push('t: ' + total);
                         return html.join('<br/>');
                     }
                 },
                 legend: {
-                    data:[ 'PC','移动' ]
+                    data:[ 'w','m' ]
                 },
                 dataZoom: [
                     {
@@ -138,20 +118,19 @@
                 ],
                 series : [
                     {
-                        name:'PC',
+                        name:'w',
                         type:'bar',
                         stack: 'total',
                         data: total.data.www
                     },
                     {
-                        name:'移动',
+                        name:'m',
                         type:'bar',
                         stack: 'total',
                         data: total.data.m
                     }
                 ]
             };
-            // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         })();
     </script>
